@@ -1,0 +1,1418 @@
+{
+	"info": {
+		"_postman_id": "7e2487b2-f85e-4f62-b01e-992646632498",
+		"name": "HRS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36149555"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Admin",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "admin@123",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin@hrs.com",
+									"type": "text"
+								},
+								{
+									"key": "contactNumber",
+									"value": "9213443951",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/md.amir/Downloads/Amazon-Logo.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Me",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Admin",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "admin@123",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin1@hrs.com",
+									"type": "text"
+								},
+								{
+									"key": "contactNumber",
+									"value": "9213443951",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/md.amir/Downloads/Amazon-Logo.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Google SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Amir khan\",\r\n    \"email\": \"khanmdamir062@gmail.com\",\r\n    \"googleId\": \"Mk4VsnJY3lab5UeOtBOnYDZIPEq2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/google-login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"google-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"admin@123\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjYwOWE1YzEyODk5MmI2YmRjOTRjNTciLCJpYXQiOjE3MTc2MDg4NjMsImV4cCI6MTcxNzY5NTI2M30.7028gw2DFWkuitxKb7bo7FVLC00QB8hOnzqnNMdNFxQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Add Driver",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Driver 10",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "driver10@123",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "driver10@email.com",
+									"type": "text"
+								},
+								{
+									"key": "contactNumber",
+									"value": "9213410951",
+									"type": "text"
+								},
+								{
+									"key": "licenseNumber",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/md.amir/Downloads/download.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/drivers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Drivers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/drivers?q=driver&page=1&limit=10&sort=name&sortBy=asc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"drivers"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "driver"
+								},
+								{
+									"key": "status",
+									"value": "Active",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "name"
+								},
+								{
+									"key": "sortBy",
+									"value": "asc"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Driver",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/drivers/666301e063af562be8fe3402",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								"666301e063af562be8fe3402"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Driver",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Driver 3",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "driver4@123",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "driver3@email.com",
+									"type": "text"
+								},
+								{
+									"key": "contactNumber",
+									"value": "9213443444",
+									"type": "text"
+								},
+								{
+									"key": "licenseNumber",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "profileImage",
+									"value": "Test111",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/md.amir/Downloads/google-logo-9831.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/drivers/66641229f2a83f40ac342ee2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								"66641229f2a83f40ac342ee2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Driver Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Inactive\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/drivers/6672f6125b94964e2972bba7/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								"6672f6125b94964e2972bba7",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Driver",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/drivers/666301bc63af562be8fe33fc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"drivers",
+								"666301bc63af562be8fe33fc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Get Vehicles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/vehicles?page=1&limit=10&sort=vehicleNumber&sortBy=asc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "MH01TA1001",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "Active",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "vehicleNumber"
+								},
+								{
+									"key": "sortBy",
+									"value": "asc"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "vehicleNumber",
+									"value": "MH99TA1001",
+									"type": "text"
+								},
+								{
+									"key": "company",
+									"value": "Eicher",
+									"type": "text"
+								},
+								{
+									"key": "capacity",
+									"value": "212",
+									"type": "text"
+								},
+								{
+									"key": "vehicleType",
+									"value": "66a35728f154df7d7ac56337",
+									"type": "text"
+								},
+								{
+									"key": "mfgYear",
+									"value": "2020",
+									"type": "text"
+								},
+								{
+									"key": "chassisNumber",
+									"value": "666633",
+									"type": "text"
+								},
+								{
+									"key": "regNumber",
+									"value": "666633",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": [
+										"/C:/Users/md.amir/Downloads/download.png",
+										"/C:/Users/md.amir/Downloads/Apple-Logo.png",
+										"/C:/Users/md.amir/Downloads/Amazon-Logo.png"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/vehicles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Vehicle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/vehicles/66a765cb1dcf8592695dfc29",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles",
+								"66a765cb1dcf8592695dfc29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "vehicleNumber",
+									"value": "MH99TA1008",
+									"type": "text"
+								},
+								{
+									"key": "company",
+									"value": "Eicher",
+									"type": "text"
+								},
+								{
+									"key": "capacity",
+									"value": "222222",
+									"type": "text"
+								},
+								{
+									"key": "vehicleType",
+									"value": "66a35691f154df7d7ac56331",
+									"type": "text"
+								},
+								{
+									"key": "mfgYear",
+									"value": "2020",
+									"type": "text"
+								},
+								{
+									"key": "chassisNumber",
+									"value": "232323",
+									"type": "text"
+								},
+								{
+									"key": "regNumber",
+									"value": "232323",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": [
+										"/C:/Users/md.amir/Downloads/mongo.png",
+										"/C:/Users/md.amir/Downloads/node-js.png"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/vehicles/66a765cb1dcf8592695dfc29",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles",
+								"66a765cb1dcf8592695dfc29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vehicle Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Inactive\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/vehicles/66a765cb1dcf8592695dfc29/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles",
+								"66a765cb1dcf8592695dfc29",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehicle",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/vehicles/666499c32a6e011c01a24d78",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles",
+								"666499c32a6e011c01a24d78"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehicle Image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/vehicles/66a765cb1dcf8592695dfc29/images/66a9c6e49b0774e39fe23aa0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicles",
+								"66a765cb1dcf8592695dfc29",
+								"images",
+								"66a9c6e49b0774e39fe23aa0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Get Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/customers?status=Active&page=1&limit=10&sort=vehicleNumber&sortBy=asc&accountType=google",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"customers"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "MH01TA1001",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "Active"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "vehicleNumber"
+								},
+								{
+									"key": "sortBy",
+									"value": "asc"
+								},
+								{
+									"key": "accountType",
+									"value": "google"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/customers/6672f6125b94964e2972bba7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"customers",
+								"6672f6125b94964e2972bba7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Inactive\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/customers/6672f6125b94964e2972bba7/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"customers",
+								"6672f6125b94964e2972bba7",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle type",
+			"item": [
+				{
+					"name": "Get Vehicle Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/vehicle-type?page=1&limit=10&sort=createdAt&sortBy=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle-type"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt"
+								},
+								{
+									"key": "sortBy",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Vehicle Type",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Tanker\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/vehicle-type",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Vehicle Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/vehicle-type/66a271956b1804f9cd99227e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle-type",
+								"66a271956b1804f9cd99227e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vehicle Type",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Truck1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/vehicle-type/66a271956b1804f9cd99227e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle-type",
+								"66a271956b1804f9cd99227e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehicle Type",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/vehicle-type/66a271956b1804f9cd99227e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"vehicle-type",
+								"66a271956b1804f9cd99227e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DailyExpense",
+			"item": [
+				{
+					"name": "delete DE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/daily-expense/66a67b63b073757d0aa11386",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"daily-expense",
+								"66a67b63b073757d0aa11386"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add DE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicle\": \"66ab24afb15da51bda19e4d9\",\r\n    \"date\": \"2024-07-22T12:48:56.372Z\",\r\n    \"expenseOnFuel\": 200,\r\n    \"challan\": 1000,\r\n    \"otherExpenses\": 500,\r\n    \"remark\": \"Test remark 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/daily-expense",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"daily-expense"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All DE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/daily-expense?fromDate=2024-07-23T00:00:00.000Z&toDate=2024-08-01T23:59:59.999Z",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"daily-expense"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "AA",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "name",
+									"disabled": true
+								},
+								{
+									"key": "sortBy",
+									"value": "asc",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "Approved",
+									"disabled": true
+								},
+								{
+									"key": "vehicle",
+									"value": "66ab24afb15da51bda19e4d9",
+									"disabled": true
+								},
+								{
+									"key": "fromDate",
+									"value": "2024-07-23T00:00:00.000Z"
+								},
+								{
+									"key": "toDate",
+									"value": "2024-08-01T23:59:59.999Z"
+								},
+								{
+									"key": "createdBy",
+									"value": "6672f19977c89f402d7f148f",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single DE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/daily-expense/66a67c09cb145bcf6fc49e5e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"daily-expense",
+								"66a67c09cb145bcf6fc49e5e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update DE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Truck1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/daily-expense/66a271956b1804f9cd99227e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"daily-expense",
+								"66a271956b1804f9cd99227e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update DE Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Pending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/daily-expense/66a67c09cb145bcf6fc49e5e/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"daily-expense",
+								"66a67c09cb145bcf6fc49e5e",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Get All Addreses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/address?page=1&limit=10&sort=createdAt&sortBy=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"address"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "10000",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt"
+								},
+								{
+									"key": "sortBy",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"name\": \"Railway station\",\r\n            \"flatNo\": \"\",\r\n            \"streetName\": \"New Street\",\r\n            \"area\": \"Ghatkopar\",\r\n            \"pincode\": 432322,\r\n            \"city\": \"Mumbai\",\r\n            \"state\": \"Maharastra\",\r\n            \"lat\": 19.088844,\r\n            \"lng\": 72.9078467\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/address/66a67c09cb145bcf6fc49e5e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"address",
+								"66a67c09cb145bcf6fc49e5e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Address",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"name\": \"Railway station\",\r\n            \"flatNo\": \"\",\r\n            \"streetName\": \"New Street\",\r\n            \"area\": \"Ghatkopar\",\r\n            \"pincode\": 432322,\r\n            \"city\": \"Mumbai\",\r\n            \"state\": \"Maharastra\",\r\n            \"lat\": 19.088844,\r\n            \"lng\": 72.9078467\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/address/66b8396668a5cd167404f320",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"address",
+								"66b8396668a5cd167404f320"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Primary Address",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/address/66b8396668a5cd167404f320/primary",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"address",
+								"66b8396668a5cd167404f320",
+								"primary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Address",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/address/66a271956b1804f9cd99227e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"address",
+								"66a271956b1804f9cd99227e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Njk2M2U2ZDEzODgxNTUwN2RiNTk0ZDYiLCJpYXQiOjE3MjMzNzY5MzUsImV4cCI6MTcyMzQ2MzMzNX0.S_9ESPhTS-VkYRXkJKmMfQ4s5qXE9Pa4hkyYuXSm244",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
