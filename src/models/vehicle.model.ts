@@ -17,6 +17,7 @@ const vehicleSchema = new Schema<IVehicle>(
     insuranceExpiryDate: { type: Date },
     fitnessNumber: { type: String },
     fitnessExpiryDate: { type: Date },
+    costPerKm: { type: Number, required: true },
   },
   {
     timestamps: true,

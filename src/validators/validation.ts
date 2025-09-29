@@ -56,6 +56,7 @@ const schemas = {
     insuranceExpiryDate: Joi.any().required(),
     fitnessNumber: Joi.any().required(),
     fitnessExpiryDate: Joi.any().required(),
+    costPerKm: Joi.any().required(),
   }),
   [ValidationKeys.UPDATE_ACTIVITY_STATUS]: Joi.object({
     status: Joi.string().required().valid(ActivityStatus.ACTIVE, ActivityStatus.INACTIVE),

@@ -65,6 +65,7 @@ const createVehicle = async (reqBody: IVehicle): Promise<IVehicle> => {
     insuranceExpiryDate: reqBody.insuranceExpiryDate ? new Date(reqBody.insuranceExpiryDate) : null,
     fitnessNumber: reqBody.fitnessNumber || CommonConst.EMPTY_STRING,
     fitnessExpiryDate: reqBody.fitnessExpiryDate ? new Date(reqBody.fitnessExpiryDate) : null,
+    costPerKm: reqBody.costPerKm || CommonConst.EMPTY_STRING,
   });
   return (await vehicle.save()).populate(PopulateKeys.VEHICLE_TYPE);
 };
