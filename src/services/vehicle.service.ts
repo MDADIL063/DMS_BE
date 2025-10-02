@@ -54,7 +54,7 @@ const createVehicle = async (reqBody: IVehicle): Promise<IVehicle> => {
   const vehicle = new Vehicle({
     vehicleNumber: reqBody.vehicleNumber || CommonConst.EMPTY_STRING,
     company: reqBody.company || CommonConst.EMPTY_STRING,
-    capacity: reqBody.capacity || CommonConst.EMPTY_STRING,
+    capacity: Number(reqBody.capacity) || CommonConst.EMPTY_STRING,
     vehicleType: reqBody.vehicleType || CommonConst.EMPTY_STRING,
     mfgYear: reqBody.mfgYear || CommonConst.EMPTY_STRING,
     chassisNumber: reqBody.chassisNumber || CommonConst.EMPTY_STRING,
@@ -98,6 +98,10 @@ const updateVehicle = async (id: string, reqBody: IVehicle): Promise<any> => {
     reqBody.imageUrls = JSON.stringify(reqBody.imageUrls);
   } else {
     delete reqBody.imageUrls;
+  }
+
+  if (reqBody.capacity) {
+    reqBody.capacity = Number(reqBody.capacity);
   }
 
   return await Vehicle.findByIdAndUpdate(id, reqBody).populate(PopulateKeys.VEHICLE_TYPE);

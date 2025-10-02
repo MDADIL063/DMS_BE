@@ -3,9 +3,11 @@ import * as jwt from "jsonwebtoken";
 import { AppError } from "../classes/app-error.class";
 import { AppMessages, CommonConst, HttpStatus, UserRoles, ActivityStatus } from "../data/app.constants";
 import { cacheGetItem } from "../services/cache.service";
+import { getSingleUser } from "../services/user.service";
+import { IUser } from "../interfaces/user.interface";
 
 const Auth = (roles?: `${UserRoles}`[]) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     const token =
       req.headers && req.headers.authorization
         ? req.headers.authorization.split(CommonConst.JWT_TOKEN_PREFIX)[1]
@@ -13,11 +15,12 @@ const Auth = (roles?: `${UserRoles}`[]) => {
     try {
       const tokenInfo: any = jwt.verify(token, process.env.TOKEN_SECRET_KEY || CommonConst.EMPTY_STRING);
       // Checking token is exist in cache or not
-      if (!cacheGetItem(tokenInfo.userId)) {
-        throw new AppError(HttpStatus.UNAUTHORIZED, AppMessages.SESSION_EXPIRED);
-      }
-      const userInfo: any = cacheGetItem(tokenInfo.userId);
-      req.user = userInfo.user;
+      // if (!cacheGetItem(tokenInfo.userId)) {
+      //   throw new AppError(HttpStatus.UNAUTHORIZED, AppMessages.SESSION_EXPIRED);
+      // }
+      // const userInfo: any = cacheGetItem(tokenInfo.userId);
+      // req.user = userInfo.user;
+      req.user = (await getSingleUser(tokenInfo.userId)) as IUser;
       if (req.user.status !== ActivityStatus.ACTIVE) {
         throw new AppError(HttpStatus.UNAUTHORIZED, AppMessages.ACCOUNT_INACTIVE);
       }

@@ -89,6 +89,19 @@ const schemas = {
   [ValidationKeys.SETTINGS]: Joi.object<ISettings>({
     pricePerKM: Joi.number().required(),
   }),
+  [ValidationKeys.TRIP]: Joi.object({
+    reason: Joi.any(),
+    description: Joi.any(),
+    itemToCarry: Joi.string().required(),
+    startLocation: Joi.object().required(),
+    endLocation: Joi.object().required(),
+    distance: Joi.number().required(),
+    duration: Joi.string().required(),
+    capacity: Joi.number().required(),
+    price: Joi.string().required(),
+    startDateTime: Joi.date().required(),
+    vehicle: Joi.string().required(),
+  }),
 };
 
 const validate = (key: `${ValidationKeys}`, reqBody: any): boolean | string => {

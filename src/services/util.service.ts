@@ -70,7 +70,7 @@ const buildQuery = (queryBuilderKey: `${QueryBuilderKeys}`, req: Request, defaul
             $or: [
               { vehicleNumber: { $regex: req.query.q || CommonConst.EMPTY_STRING, $options: CommonConst.I } },
               { company: { $regex: req.query.q || CommonConst.EMPTY_STRING, $options: CommonConst.I } },
-              { capacity: { $regex: req.query.q || CommonConst.EMPTY_STRING, $options: CommonConst.I } },
+              // { capacity: { $regex: req.query.q || CommonConst.EMPTY_STRING, $options: CommonConst.I } },
               { mfgYear: { $regex: req.query.q || CommonConst.EMPTY_STRING, $options: CommonConst.I } },
               { chassisNumber: { $regex: req.query.q || CommonConst.EMPTY_STRING, $options: CommonConst.I } },
               { regNumber: { $regex: req.query.q || CommonConst.EMPTY_STRING, $options: CommonConst.I } },
@@ -83,6 +83,9 @@ const buildQuery = (queryBuilderKey: `${QueryBuilderKeys}`, req: Request, defaul
       }
       if (req.query.vehicleType) {
         query.$and.push({ vehicleType: { $eq: req.query.vehicleType } });
+      }
+      if (req.query.capacity) {
+        query.$and.push({ capacity: { $gte: Number(req.query.capacity) } });
       }
       return { query, queryParams };
     case QueryBuilderKeys.CUSTOMER_LIST:

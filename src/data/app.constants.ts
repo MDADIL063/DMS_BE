@@ -100,6 +100,7 @@ export enum Routes {
   COMMON = "/common",
   FEEDBACK = "/feedBack",
   ADMIN_DASHBOARD = "/admin/dashboard",
+  TRIPS = "/trips",
 }
 
 export enum Endpoints {
@@ -133,6 +134,7 @@ export enum ValidationKeys {
   UPDATE_ME = "update_me",
   ADDRESS = "address",
   SETTINGS = "settings",
+  TRIP = "trip",
 }
 
 export enum SchemaNames {

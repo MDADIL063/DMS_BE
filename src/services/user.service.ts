@@ -1,5 +1,13 @@
 import { AppError } from "../classes/app-error.class";
-import { AppMessages, CommonConst, HttpStatus, ActivityStatus, ValidationKeys, AccountType } from "../data/app.constants";
+import {
+  AppMessages,
+  CommonConst,
+  HttpStatus,
+  ActivityStatus,
+  ValidationKeys,
+  AccountType,
+  MongooseExcludedKeys,
+} from "../data/app.constants";
 import { IUser } from "../interfaces/user.interface";
 import User from "../models/user.model";
 import validate from "../validators/validation";
@@ -42,4 +50,8 @@ const createUser = async (reqBody: IUser): Promise<IUser> => {
   return { ...savedUser.toJSON(), password: undefined };
 };
 
-export { createUser };
+const getSingleUser = async (id: string): Promise<IUser | null> => {
+  return await User.findOne({ _id: id }).select(MongooseExcludedKeys.PASSWORD);
+};
+
+export { createUser, getSingleUser };

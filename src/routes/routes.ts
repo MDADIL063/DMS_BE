@@ -3,7 +3,7 @@ import authController from "../controllers/auth.controller";
 import driverController from "../controllers/driver.controller";
 import { Routes, UserRoles } from "../data/app.constants";
 import Auth from "../middleware/auth.middleware";
-import vehicleController from "../controllers/vehicle.constroller";
+import vehicleController from "../controllers/vehicle.controller";
 import customerController from "../controllers/customer.controller";
 import vehicleTypeController from "../controllers/vehicleType.controller";
 import dailyExpenseController from "../controllers/daily-expense.controller";
@@ -12,6 +12,7 @@ import commonController from "../controllers/common.controller";
 import driverAvailabilityController from "../controllers/driver-availability.controller";
 import feedbackController from "../controllers/feedBack.controller";
 import { adminDashboardController } from "../controllers/adminDashboard.controller";
+import tripController from "../controllers/trip.controller";
 
 const routes = Router();
 
@@ -27,4 +28,5 @@ routes.use(Routes.DRIVER_AVAILABILITY, Auth([UserRoles.DRIVER]), driverAvailabil
 routes.use(Routes.FEEDBACK, Auth([UserRoles.CUSTOMER, UserRoles.ADMIN]), feedbackController);
 routes.use(Routes.ADMIN_DASHBOARD, adminDashboardController);
 
+routes.use(Routes.TRIPS, Auth([UserRoles.CUSTOMER, UserRoles.ADMIN]), tripController);
 export default routes;

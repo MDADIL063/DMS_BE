@@ -103,10 +103,10 @@ const signInWithGoogle = async (reqBody: IUser) => {
 };
 
 const logout = (req: Request) => {
-  if (req.user._id) {
-    // Removing token from cache
-    cacheRemoveItem(req.user._id as string);
-  }
+  // if (req.user._id && cacheGetItem(req.user._id as string)) {
+  //   // Removing token from cache
+  //   cacheRemoveItem(req.user._id as string);
+  // }
   return true;
 };
 
@@ -129,4 +129,4 @@ const updateMe = async (req: Request): Promise<any> => {
   return await User.findByIdAndUpdate(req.user._id, payload).select(MongooseExcludedKeys.PASSWORD);
 };
 
-export { login, logout, signInWithGoogle,updateMe };
+export { login, logout, signInWithGoogle, updateMe };
