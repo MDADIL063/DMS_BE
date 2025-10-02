@@ -99,6 +99,7 @@ export enum Routes {
   ADDRESS = "/address",
   COMMON = "/common",
   FEEDBACK = "/feedBack",
+  ADMIN_DASHBOARD = "/admin/dashboard",
 }
 
 export enum Endpoints {
@@ -116,6 +117,8 @@ export enum Endpoints {
   CHECK_IN = "/check-in",
   CHECK_OUT = "/check-out",
   TODAY = "/today",
+  VEHICLE_COUNT = "/vehicles-count",
+  DRIVER_COUNT = "/drivers-count",
 }
 
 export enum ValidationKeys {

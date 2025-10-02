@@ -11,11 +11,12 @@ import addressController from "../controllers/address.controller";
 import commonController from "../controllers/common.controller";
 import driverAvailabilityController from "../controllers/driver-availability.controller";
 import feedbackController from "../controllers/feedBack.controller";
+import { adminDashboardController } from "../controllers/adminDashboard.controller";
 
 const routes = Router();
 
 routes.use(Routes.AUTH, authController);
-routes.use(Routes.DRIVERS, Auth([UserRoles.ADMIN]), driverController);
+routes.use(Routes.DRIVERS, driverController);
 routes.use(Routes.VEHICLES, vehicleController);
 routes.use(Routes.CUSTOMERS, Auth([UserRoles.ADMIN]), customerController);
 routes.use(Routes.VEHICLE_TYPE, Auth([UserRoles.ADMIN]), vehicleTypeController);
@@ -24,4 +25,6 @@ routes.use(Routes.ADDRESS, Auth([UserRoles.CUSTOMER]), addressController);
 routes.use(Routes.COMMON, commonController);
 routes.use(Routes.DRIVER_AVAILABILITY, Auth([UserRoles.DRIVER]), driverAvailabilityController);
 routes.use(Routes.FEEDBACK, Auth([UserRoles.CUSTOMER, UserRoles.ADMIN]), feedbackController);
+routes.use(Routes.ADMIN_DASHBOARD, adminDashboardController);
+
 export default routes;

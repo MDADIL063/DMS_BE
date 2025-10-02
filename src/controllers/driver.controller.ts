@@ -6,6 +6,7 @@ import { deleteDriver, getDrivers, getSingleDriver, updateDriver, updateDriverSt
 import { AppError } from "../classes/app-error.class";
 import { removeFileFromFirebase, uploadFileOnFirebase } from "../services/file-upload.service";
 import imageValidator from "../validators/image.validator";
+import User from "../models/user.model";
 
 const driverController = Router();
 
@@ -32,6 +33,27 @@ driverController.get(
   AsyncHandler(async (req: Request, res: Response) => {
     const response = await getDrivers(req);
     res.status(HttpStatus.OK).json(response);
+  })
+);
+
+// GET total and active driver count
+
+driverController.get(
+  Endpoints.DRIVER_COUNT,
+  AsyncHandler(async (req: Request, res: Response) => {
+    try {
+      const totalDrivers = await User.countDocuments({ role: "DRIVER" });
+      const activeDrivers = await User.countDocuments({ role: "DRIVER", status: "Active" });
+
+      res.status(200).json({
+        success: true,
+        message: "Driver counts fetched successfully",
+        total: totalDrivers,
+        active: activeDrivers,
+      });
+    } catch (error: any) {
+      res.status(500).json({ message: "Error fetching driver counts", error: error.message });
+    }
   })
 );
 

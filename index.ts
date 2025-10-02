@@ -6,6 +6,8 @@ import { Routes } from "./src/data/app.constants";
 import { errorHandler, notFound } from "./src/middleware/error.middleware";
 import routes from "./src/routes/routes";
 import { dbConnect } from "./src/services/db.service";
+import "./src/services/cron-jobs.service";
+// import "./src/services/expiryCheck-job.service";
 
 dotenv.config();
 
