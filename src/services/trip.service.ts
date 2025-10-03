@@ -1,12 +1,22 @@
 import { Request } from "express";
 import { AppError } from "../classes/app-error.class";
-import { AppDefaults, HttpStatus, PopulateKeys, QueryBuilderKeys, SortBy, ValidationKeys } from "../data/app.constants";
+import {
+  AppDefaults,
+  DriverAvailabilityStatus,
+  HttpStatus,
+  PopulateKeys,
+  QueryBuilderKeys,
+  SortBy,
+  TripStatus,
+  ValidationKeys,
+} from "../data/app.constants";
 import { IQuery } from "../interfaces/query.interface";
 import { IListResponse } from "../interfaces/response.interface";
 import { ITrip } from "../interfaces/trip.interface";
 import Trip from "../models/trip.model";
 import validate from "../validators/validation";
 import { buildQuery } from "./util.service";
+import { updateDriverStatus } from "./driver-availability.service";
 
 const addTrip = async (req: Request): Promise<ITrip> => {
   // Validating vehicle before saving into DB
@@ -67,4 +77,30 @@ const getSingleTrip = async (id: string): Promise<ITrip | null> => {
   return await Trip.findOne({ _id: id }).populate(PopulateKeys.TRIP);
 };
 
-export { addTrip, getSingleTrip, getTrips };
+const assignDriverToTrip = async (tripId: string, driverId: string): Promise<ITrip | null> => {
+  return await Trip.findOneAndUpdate({ _id: tripId }, { driver: driverId, status: TripStatus.SCHEDULED }).populate(PopulateKeys.TRIP);
+};
+
+const updateTripStatus = async (tripId: string, status: TripStatus): Promise<ITrip | null> => {
+  const updateData: Partial<ITrip> = { status };
+
+  const trip: any = await Trip.findOne({ _id: tripId }).populate(PopulateKeys.TRIP).lean();
+
+  if (status === TripStatus.INPROGRESS) {
+    updateData.tripStartDateTime = new Date().toISOString();
+    await updateDriverStatus(trip?.driver?._id, DriverAvailabilityStatus.ON_TRIP);
+  }
+
+  if (status === TripStatus.COMPLETED) {
+    updateData.tripCompletedDateTime = new Date().toISOString();
+    await updateDriverStatus(trip?.driver?._id, DriverAvailabilityStatus.AVAILABLE);
+  }
+
+  if (status === TripStatus.CANCELLED) {
+    updateData.tripCancelledDateTime = new Date().toISOString();
+  }
+
+  return Trip.findOneAndUpdate({ _id: tripId }, updateData).populate(PopulateKeys.TRIP) as unknown as ITrip;
+};
+
+export { addTrip, getSingleTrip, getTrips, assignDriverToTrip, updateTripStatus };

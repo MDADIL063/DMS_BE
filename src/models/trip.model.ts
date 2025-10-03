@@ -29,9 +29,12 @@ const tripSchema = new Schema<ITrip>(
 
     status: {
       type: String,
-      enum: ["New", "Scheduled", "InProgress", "Completed", "Cancelled"],
+      enum: ["New", "Scheduled", "In Progress", "Completed", "Cancelled"],
       default: "New",
     },
+    tripStartDateTime: { type: Date, required: false },
+    tripCompletedDateTime: { type: Date, required: false },
+    tripCancelledDateTime: { type: Date, required: false },
   },
   { timestamps: true }
 );

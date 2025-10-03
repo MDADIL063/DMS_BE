@@ -1,3 +1,4 @@
+import { TripStatus } from "../data/app.constants";
 import { IUser } from "./user.interface";
 
 export interface ITrip {
@@ -20,9 +21,12 @@ export interface ITrip {
   };
   distance: number; // km
   duration: string;
-  status: "New" | "Scheduled" | "InProgress" | "Completed" | "Cancelled";
+  status: `${TripStatus}`;
   price: string | number;
   startDateTime: Date;
   createdAt: Date;
   updatedAt: Date;
+  tripStartDateTime: Date | string;
+  tripCompletedDateTime: Date | string;
+  tripCancelledDateTime: Date | string;
 }

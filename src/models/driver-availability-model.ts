@@ -5,7 +5,7 @@ import { IDriverAvailability } from "../interfaces/driver-availability.interface
 const driverAvailabilitySchema = new Schema<IDriverAvailability>(
   {
     driver: { type: mongoose.Schema.Types.ObjectId, ref: SchemaNames.USER },
-    date: { type: Date, required: true },
+    date: { type: String, required: true },
 
     checkInTime: { type: Date },
     checkOutTime: { type: Date },

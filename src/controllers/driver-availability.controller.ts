@@ -1,7 +1,13 @@
 import { Request, Response, Router } from "express";
 import { Endpoints } from "../data/app.constants";
 import AsyncHandler from "express-async-handler";
-import { checkInDriver, checkOutDriver, getAvailabilityHistory, getTodayAvailability } from "../services/driver-availability.service";
+import {
+  checkInDriver,
+  checkOutDriver,
+  getAvailabilityHistory,
+  getTodayAvailability,
+  getTodayAvailabilityForAllDrivers,
+} from "../services/driver-availability.service";
 
 const driverAvailabilityController = Router();
 
@@ -9,7 +15,6 @@ const driverAvailabilityController = Router();
 driverAvailabilityController.get(
   Endpoints.ROOT,
   AsyncHandler(async (req: Request, res: Response) => {
-    console.log("fgdfgjghfm");
     res.json({ ds: "Success" });
   })
 );
@@ -112,6 +117,19 @@ driverAvailabilityController.get(
       message: "Driver availability history",
       count: history.length,
       data: history,
+    });
+  })
+);
+
+driverAvailabilityController.get(
+  Endpoints.TODAY_ALL_DRIVERS,
+  AsyncHandler(async (req: Request, res: Response) => {
+    const availability = await getTodayAvailabilityForAllDrivers();
+
+    res.status(200).json({
+      success: true,
+      message: "Drivers availability for today",
+      data: availability.length ? availability : [],
     });
   })
 );

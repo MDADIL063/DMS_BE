@@ -24,7 +24,7 @@ routes.use(Routes.VEHICLE_TYPE, Auth([UserRoles.ADMIN]), vehicleTypeController);
 routes.use(Routes.DAILY_EXPENSE, Auth([UserRoles.ADMIN, UserRoles.DRIVER]), dailyExpenseController);
 routes.use(Routes.ADDRESS, Auth([UserRoles.CUSTOMER]), addressController);
 routes.use(Routes.COMMON, commonController);
-routes.use(Routes.DRIVER_AVAILABILITY, Auth([UserRoles.DRIVER]), driverAvailabilityController);
+routes.use(Routes.DRIVER_AVAILABILITY, Auth([UserRoles.DRIVER, UserRoles.ADMIN]), driverAvailabilityController);
 routes.use(Routes.FEEDBACK, Auth([UserRoles.CUSTOMER, UserRoles.ADMIN]), feedbackController);
 routes.use(Routes.ADMIN_DASHBOARD, adminDashboardController);
 

@@ -118,9 +118,12 @@ export enum Endpoints {
   CHECK_IN = "/check-in",
   CHECK_OUT = "/check-out",
   TODAY = "/today",
+  TODAY_ALL_DRIVERS = "/today-all-drivers",
   VEHICLE_COUNT = "/vehicles-count",
   DRIVER_COUNT = "/drivers-count",
   TRIP_COUNT = "/trips-count",
+  ASSIGN_DRIVER = "/:tripId/assign-driver/:driverId",
+  UPDATE_TRIP_STATUS = "/:id/update-status",
 }
 
 export enum ValidationKeys {
@@ -181,6 +184,14 @@ export enum PopulateKeys {
   VEHICLE_TYPE = "vehicleType",
   DAILY_EXPENSE = "vehicle createdBy updatedBy",
   TRIP = "customer vehicle driver",
+}
+
+export enum TripStatus {
+  NEW = "New",
+  SCHEDULED = "Scheduled",
+  INPROGRESS = "In Progress",
+  COMPLETED = "Completed",
+  CANCELLED = "Cancelled",
 }
 
 export enum HttpStatus {

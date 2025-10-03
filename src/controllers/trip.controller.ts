@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
 import AsyncHandler from "express-async-handler";
-import { Endpoints, HttpStatus } from "../data/app.constants";
+import { Endpoints, HttpStatus, TripStatus } from "../data/app.constants";
 //import { addAddress, deleteAddress, getAddressById, updateAddress, getAllAddress, makeAddressPrimary } from "../services/address.service";
-import { addTrip, getTrips, getSingleTrip } from "../services/trip.service";
+import { addTrip, getTrips, getSingleTrip, assignDriverToTrip, updateTripStatus } from "../services/trip.service";
 import Trip from "../models/trip.model";
 
 const tripController = Router();
@@ -65,6 +65,56 @@ tripController.get(
   })
 );
 
+tripController.put(
+  Endpoints.ASSIGN_DRIVER,
+  AsyncHandler(async (req: Request, res: Response) => {
+    const { tripId, driverId } = req.params;
+    if (!tripId || !driverId) {
+      res.status(400).json({
+        success: false,
+        message: "Trip or Driver missing",
+      });
+      return;
+    }
+    const response = await assignDriverToTrip(tripId, driverId);
+    res.status(HttpStatus.OK).json(response);
+  })
+);
+
+tripController.put(
+  Endpoints.ASSIGN_DRIVER,
+  AsyncHandler(async (req: Request, res: Response) => {
+    const { tripId, driverId } = req.params;
+    if (!tripId || !driverId) {
+      res.status(400).json({
+        success: false,
+        message: "Trip or Driver missing",
+      });
+      return;
+    }
+    const response = await assignDriverToTrip(tripId, driverId);
+    res.status(HttpStatus.OK).json(response);
+  })
+);
+
+tripController.put(
+  Endpoints.UPDATE_TRIP_STATUS,
+  AsyncHandler(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    if (status === TripStatus.INPROGRESS || status === TripStatus.COMPLETED || status === TripStatus.CANCELLED) {
+      const response = await updateTripStatus(id, status);
+      res.status(HttpStatus.OK).json(response);
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "Please provide valid trip status",
+      });
+      return;
+    }
+  })
+);
+
 // tripController.put(
 //   Endpoints.ID,
 //   AsyncHandler(async (req: Request, res: Response) => {
@@ -85,14 +135,6 @@ tripController.get(
 //   Endpoints.ID,
 //   AsyncHandler(async (req: Request, res: Response) => {
 //     const response = await deleteAddress(req);
-//     res.status(HttpStatus.OK).json(response);
-//   })
-// );
-
-// tripController.put(
-//   Endpoints.PRIMARY_ADDRESS,
-//   AsyncHandler(async (req: Request, res: Response) => {
-//     const response = await makeAddressPrimary(req);
 //     res.status(HttpStatus.OK).json(response);
 //   })
 // );

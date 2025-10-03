@@ -3,7 +3,7 @@ import DriverAvailability from "../models/driver-availability-model";
 
 export const checkInDriver = async (driverId: string) => {
   const today = new Date();
-  const dateOnly = new Date(today.toDateString());
+  const dateOnly = new Date().toISOString().split("T")[0];
 
   // Check if a record already exists for this driver today
   let availability = await DriverAvailability.findOne({ driver: driverId, date: dateOnly });
@@ -30,7 +30,7 @@ export const checkInDriver = async (driverId: string) => {
 };
 export const checkOutDriver = async (driverId: string) => {
   const today = new Date();
-  const dateOnly = new Date(today.toDateString()); // normalize to YYYY-MM-DD
+  const dateOnly = new Date().toISOString().split("T")[0];
 
   const availability = await DriverAvailability.findOne({ driver: driverId, date: dateOnly });
 
@@ -62,7 +62,7 @@ export const checkOutDriver = async (driverId: string) => {
 
 export const getTodayAvailability = async (driverId: string) => {
   const today = new Date();
-  const dateOnly = new Date(today.toDateString()); // normalize to YYYY-MM-DD
+  const dateOnly = new Date().toISOString().split("T")[0];
 
   const availability = await DriverAvailability.findOne({ driver: driverId, date: dateOnly });
 
@@ -80,6 +80,24 @@ export const getTodayAvailability = async (driverId: string) => {
   }
 
   return availability;
+};
+
+export const getTodayAvailabilityForAllDrivers = async () => {
+  const today = new Date();
+  const dateOnly = new Date().toISOString().split("T")[0];
+
+  const availabilities = await DriverAvailability.find({ date: dateOnly, status: DriverAvailabilityStatus.AVAILABLE }).populate("driver");
+
+  return availabilities.map((availability: any) => {
+    if (availability.checkInTime && availability.checkOutTime) {
+      const diffMs = availability.checkOutTime.getTime() - availability.checkInTime.getTime();
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+      const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+      availability = availability.toObject(); // make it plain object if needed
+      availability.totalWorkingHours = `${diffHours}h ${diffMinutes}m`;
+    }
+    return availability;
+  });
 };
 
 export const getAvailabilityHistory = async (driverId: string, startDate: string, endDate: string) => {
@@ -123,7 +141,7 @@ export const getAvailabilityHistory = async (driverId: string, startDate: string
 };
 
 export const updateDriverStatus = async (driverId: string, status: `${DriverAvailabilityStatus}`) => {
-  const today = new Date(new Date().toDateString());
+  const today = new Date().toISOString().split("T")[0];
 
   // Find today's attendance record
   const availability = await DriverAvailability.findOne({
