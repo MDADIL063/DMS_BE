@@ -25,7 +25,7 @@ routes.use(Routes.DAILY_EXPENSE, Auth([UserRoles.ADMIN, UserRoles.DRIVER]), dail
 routes.use(Routes.ADDRESS, Auth([UserRoles.CUSTOMER]), addressController);
 routes.use(Routes.COMMON, commonController);
 routes.use(Routes.DRIVER_AVAILABILITY, Auth([UserRoles.DRIVER, UserRoles.ADMIN]), driverAvailabilityController);
-routes.use(Routes.FEEDBACK, Auth([UserRoles.CUSTOMER, UserRoles.ADMIN]), feedbackController);
+routes.use(Routes.FEEDBACK, Auth([UserRoles.CUSTOMER, UserRoles.ADMIN, UserRoles.DRIVER]), feedbackController);
 routes.use(Routes.ADMIN_DASHBOARD, adminDashboardController);
 
 routes.use(Routes.TRIPS, Auth(), tripController); // Auth([UserRoles.CUSTOMER, UserRoles.ADMIN])

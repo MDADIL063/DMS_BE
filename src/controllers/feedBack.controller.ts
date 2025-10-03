@@ -26,7 +26,7 @@ feedbackController.post(
   AsyncHandler(async (req: Request, res: Response) => {
     try {
       // Extract feedback data from request
-      const { driver, rating, comment } = req.body;
+      const { driver, rating, comment, trip } = req.body;
 
       // Get logged-in user from token (auth middleware must set req.user)
       const createdBy = (req as any).user?._id;
@@ -43,6 +43,7 @@ feedbackController.post(
       const feedbackData = {
         driver,
         rating,
+        trip,
         comment,
         createdBy,
       };
@@ -73,6 +74,14 @@ feedbackController.get(
       success: true,
       data: feedbacks,
     });
+  })
+);
+
+feedbackController.get(
+  "/trip/:tripId",
+  AsyncHandler(async (req: Request, res: Response) => {
+    const feedback = await feedbackSvc.getFeedbackTrip(req.params.tripId);
+    res.status(200).json(feedback);
   })
 );
 

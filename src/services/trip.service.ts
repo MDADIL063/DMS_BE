@@ -125,7 +125,7 @@ const addTripActivity = async (tripId: string, message: string, tripStatus: `${T
 const getAllTripActivities = async (tripId: string): Promise<ITripActivity[]> => {
   return await TripActivity.find({ trip: tripId })
     .populate("trip") // include customer details
-    .sort([[AppDefaults.SORT as string, -1]]);
+    .sort([[AppDefaults.SORT as string, 1]]);
 };
 
 export { addTrip, getSingleTrip, getTrips, assignDriverToTrip, updateTripStatus, getAllTripActivities };

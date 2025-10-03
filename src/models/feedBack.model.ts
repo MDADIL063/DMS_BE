@@ -5,6 +5,7 @@ const feedbackSchema = new Schema<IFeedback>(
   {
     driver: { type: mongoose.Schema.Types.ObjectId, ref: SchemaNames.USER, required: true },
     rating: { type: Number, min: 1, max: 5, required: true },
+    trip: { type: mongoose.Schema.Types.ObjectId, ref: SchemaNames.TRIP, required: true },
     comment: { type: String, trim: true },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: SchemaNames.USER, required: true },
     updatedBy: { type: mongoose.Schema.Types.ObjectId, ref: SchemaNames.USER },

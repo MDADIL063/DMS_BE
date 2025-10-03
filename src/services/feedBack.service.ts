@@ -16,6 +16,10 @@ export class FeedbackService {
       .exec();
   }
 
+  async getFeedbackTrip(tripId: string): Promise<IFeedback | null> {
+    return await Feedback.findOne({ trip: tripId }).populate("trip"); // optional: show creator details
+  }
+
   // ✅ Update feedback by feedbackId
   async updateFeedback(feedbackId: string, data: Partial<IFeedback>, updatedBy: string): Promise<IFeedback | null> {
     return Feedback.findByIdAndUpdate(feedbackId, { ...data, updatedBy }, { new: true }).exec();
