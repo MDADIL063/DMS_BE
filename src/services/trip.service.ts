@@ -1,12 +1,12 @@
 import { Request } from "express";
+import { AppError } from "../classes/app-error.class";
+import { AppDefaults, HttpStatus, PopulateKeys, QueryBuilderKeys, SortBy, ValidationKeys } from "../data/app.constants";
+import { IQuery } from "../interfaces/query.interface";
+import { IListResponse } from "../interfaces/response.interface";
 import { ITrip } from "../interfaces/trip.interface";
 import Trip from "../models/trip.model";
 import validate from "../validators/validation";
-import { AppError } from "../classes/app-error.class";
-import { AppDefaults, HttpStatus, QueryBuilderKeys, SortBy, ValidationKeys } from "../data/app.constants";
-import { IListResponse } from "../interfaces/response.interface";
 import { buildQuery } from "./util.service";
-import { IQuery } from "../interfaces/query.interface";
 
 const addTrip = async (req: Request): Promise<ITrip> => {
   // Validating vehicle before saving into DB
@@ -63,4 +63,8 @@ const getTrips = async (req: Request): Promise<IListResponse> => {
   };
 };
 
-export { addTrip, getTrips };
+const getSingleTrip = async (id: string): Promise<ITrip | null> => {
+  return await Trip.findOne({ _id: id }).populate(PopulateKeys.TRIP);
+};
+
+export { addTrip, getSingleTrip, getTrips };

@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 import AsyncHandler from "express-async-handler";
 import { Endpoints, HttpStatus } from "../data/app.constants";
 //import { addAddress, deleteAddress, getAddressById, updateAddress, getAllAddress, makeAddressPrimary } from "../services/address.service";
-import { addTrip, getTrips } from "../services/trip.service";
+import { addTrip, getTrips, getSingleTrip } from "../services/trip.service";
 
 const tripController = Router();
 
@@ -22,13 +22,13 @@ tripController.get(
   })
 );
 
-// tripController.get(
-//   Endpoints.ID,
-//   AsyncHandler(async (req: Request, res: Response) => {
-//     const response = await getAddressById(req.params.id);
-//     res.status(HttpStatus.OK).json(response);
-//   })
-// );
+tripController.get(
+  Endpoints.ID,
+  AsyncHandler(async (req: Request, res: Response) => {
+    const response = await getSingleTrip(req.params.id);
+    res.status(HttpStatus.OK).json(response);
+  })
+);
 
 // tripController.put(
 //   Endpoints.ID,

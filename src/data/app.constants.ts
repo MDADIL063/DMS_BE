@@ -179,6 +179,7 @@ export enum AccountType {
 export enum PopulateKeys {
   VEHICLE_TYPE = "vehicleType",
   DAILY_EXPENSE = "vehicle createdBy updatedBy",
+  TRIP = "customer vehicle driver",
 }
 
 export enum HttpStatus {
