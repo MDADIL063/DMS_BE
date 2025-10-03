@@ -120,6 +120,7 @@ export enum Endpoints {
   TODAY = "/today",
   VEHICLE_COUNT = "/vehicles-count",
   DRIVER_COUNT = "/drivers-count",
+  TRIP_COUNT = "/trips-count",
 }
 
 export enum ValidationKeys {

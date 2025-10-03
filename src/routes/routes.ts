@@ -17,7 +17,7 @@ import tripController from "../controllers/trip.controller";
 const routes = Router();
 
 routes.use(Routes.AUTH, authController);
-routes.use(Routes.DRIVERS, driverController);
+routes.use(Routes.DRIVERS, Auth([UserRoles.ADMIN]), driverController);
 routes.use(Routes.VEHICLES, vehicleController);
 routes.use(Routes.CUSTOMERS, Auth([UserRoles.ADMIN]), customerController);
 routes.use(Routes.VEHICLE_TYPE, Auth([UserRoles.ADMIN]), vehicleTypeController);

@@ -13,7 +13,6 @@ const Auth = (roles?: `${UserRoles}`[]) => {
         ? req.headers.authorization.split(CommonConst.JWT_TOKEN_PREFIX)[1]
         : CommonConst.EMPTY_STRING;
 
-    console.log("token", token);
     try {
       const tokenInfo: any = jwt.verify(token, process.env.TOKEN_SECRET_KEY || CommonConst.EMPTY_STRING);
       // Checking token is exist in cache or not

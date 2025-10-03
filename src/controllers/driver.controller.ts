@@ -7,6 +7,7 @@ import { AppError } from "../classes/app-error.class";
 import { removeFileFromFirebase, uploadFileOnFirebase } from "../services/file-upload.service";
 import imageValidator from "../validators/image.validator";
 import User from "../models/user.model";
+import Auth from "../middleware/auth.middleware";
 
 const driverController = Router();
 
@@ -40,6 +41,7 @@ driverController.get(
 
 driverController.get(
   Endpoints.DRIVER_COUNT,
+
   AsyncHandler(async (req: Request, res: Response) => {
     try {
       const totalDrivers = await User.countDocuments({ role: "DRIVER" });

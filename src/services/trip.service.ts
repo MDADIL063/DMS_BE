@@ -43,7 +43,7 @@ const getTrips = async (req: Request): Promise<IListResponse> => {
     sort: AppDefaults.SORT,
     sortBy: SortBy.ASC,
   } as IQuery);
-  console.log(query);
+  // console.log(query);
 
   // Fetch paginated trips
   const trips = await Trip.find(query)
