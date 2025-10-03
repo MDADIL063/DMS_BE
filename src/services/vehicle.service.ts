@@ -31,7 +31,10 @@ const getVehicles = async (req: Request): Promise<IListResponse> => {
     .limit(queryParams.limit)
     .transform((vehicles) => {
       return vehicles.map((vehicle) => {
-        return { ...vehicle?.toJSON(), imageUrls: JSON.parse(vehicle?.imageUrls as string) } as IVehicle;
+        return {
+          ...vehicle?.toJSON(),
+          imageUrls: vehicle?.imageUrls === '"[]"' ? [] : JSON.parse(vehicle?.imageUrls as string),
+        } as IVehicle;
       });
     });
 
@@ -74,7 +77,9 @@ const getSingleVehicle = async (id: string): Promise<IVehicle | null> => {
   return await Vehicle.findOne({ _id: id })
     .populate(PopulateKeys.VEHICLE_TYPE)
     .transform((vehicle) => {
-      return vehicle ? ({ ...vehicle?.toJSON(), imageUrls: JSON.parse(vehicle?.imageUrls as string) } as IVehicle) : null;
+      return vehicle
+        ? ({ ...vehicle?.toJSON(), imageUrls: vehicle?.imageUrls === '"[]"' ? [] : JSON.parse(vehicle?.imageUrls as string) } as IVehicle)
+        : null;
     });
 };
 

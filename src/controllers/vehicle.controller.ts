@@ -93,6 +93,7 @@ vehicleController.put(
     if (req.files) {
       for (const file of req.files as any[]) {
         uploadedFileUrl = await uploadFileOnFirebase(file as Express.Multer.File, ModuleNames.VEHICLE);
+        console.log("uploadedFileUrl", uploadedFileUrl);
         if (uploadedFileUrl) {
           files.push({
             id: getUniqueId(),
