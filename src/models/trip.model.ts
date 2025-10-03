@@ -5,7 +5,7 @@ import { ITrip } from "../interfaces/trip.interface";
 const tripSchema = new Schema<ITrip>(
   {
     reason: { type: String, required: true },
-    description: { type: Date, required: false },
+    description: { type: String, required: false },
     customer: { type: Schema.Types.ObjectId, ref: SchemaNames.USER, required: true },
     driver: { type: Schema.Types.ObjectId, ref: SchemaNames.USER },
     vehicle: { type: Schema.Types.ObjectId, ref: SchemaNames.VEHICLE },

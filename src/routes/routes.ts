@@ -28,5 +28,5 @@ routes.use(Routes.DRIVER_AVAILABILITY, Auth([UserRoles.DRIVER]), driverAvailabil
 routes.use(Routes.FEEDBACK, Auth([UserRoles.CUSTOMER, UserRoles.ADMIN]), feedbackController);
 routes.use(Routes.ADMIN_DASHBOARD, adminDashboardController);
 
-routes.use(Routes.TRIPS, Auth([UserRoles.CUSTOMER, UserRoles.ADMIN]), tripController);
+routes.use(Routes.TRIPS, Auth(), tripController); // Auth([UserRoles.CUSTOMER, UserRoles.ADMIN])
 export default routes;

@@ -12,6 +12,8 @@ const Auth = (roles?: `${UserRoles}`[]) => {
       req.headers && req.headers.authorization
         ? req.headers.authorization.split(CommonConst.JWT_TOKEN_PREFIX)[1]
         : CommonConst.EMPTY_STRING;
+
+    console.log("token", token);
     try {
       const tokenInfo: any = jwt.verify(token, process.env.TOKEN_SECRET_KEY || CommonConst.EMPTY_STRING);
       // Checking token is exist in cache or not
@@ -20,6 +22,7 @@ const Auth = (roles?: `${UserRoles}`[]) => {
       // }
       // const userInfo: any = cacheGetItem(tokenInfo.userId);
       // req.user = userInfo.user;
+
       req.user = (await getSingleUser(tokenInfo.userId)) as IUser;
       if (req.user.status !== ActivityStatus.ACTIVE) {
         throw new AppError(HttpStatus.UNAUTHORIZED, AppMessages.ACCOUNT_INACTIVE);

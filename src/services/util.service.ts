@@ -119,6 +119,44 @@ const buildQuery = (queryBuilderKey: `${QueryBuilderKeys}`, req: Request, defaul
         ],
       };
       return { query, queryParams };
+
+    //
+    case QueryBuilderKeys.TRIP_LIST:
+      query = {
+        $and: [
+          {
+            $or: [
+              { reason: { $regex: req.query.q || CommonConst.EMPTY_STRING, $options: CommonConst.I } },
+              { description: { $regex: req.query.q || CommonConst.EMPTY_STRING, $options: CommonConst.I } },
+            ],
+          },
+        ],
+      };
+
+      // ✅ filter by status
+      if (req.query.status) {
+        query.$and.push({ status: { $eq: req.query.status } });
+      }
+
+      // ✅ filter by date range
+      // if (req.query.fromDate && req.query.toDate) {
+      //   query.$and.push({
+      //     startDateTime: {
+      //       $gte: new Date(req.query.fromDate as string),
+      //       $lte: new Date(req.query.toDate as string),
+      //     },
+      //   });
+      // }
+
+      // ✅ role-based filtering
+      if (req.user.role === UserRoles.CUSTOMER) {
+        console.log(req.user._id);
+        query.$and.push({ customer: { $eq: req.user._id } });
+      } else if (req.user.role === UserRoles.DRIVER) {
+        query.$and.push({ driver: { $eq: req.user._id } });
+      }
+      return { query, queryParams };
+    //
     case QueryBuilderKeys.DAILY_EXPENSE:
       query = {
         $and: [

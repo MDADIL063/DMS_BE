@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 import AsyncHandler from "express-async-handler";
 import { Endpoints, HttpStatus } from "../data/app.constants";
 //import { addAddress, deleteAddress, getAddressById, updateAddress, getAllAddress, makeAddressPrimary } from "../services/address.service";
-import { addTrip } from "../services/trip.service";
+import { addTrip, getTrips } from "../services/trip.service";
 
 const tripController = Router();
 
@@ -11,6 +11,14 @@ tripController.post(
   AsyncHandler(async (req: Request, res: Response) => {
     const response = await addTrip(req);
     res.status(HttpStatus.CREATED).json(response);
+  })
+);
+
+tripController.get(
+  Endpoints.ROOT,
+  AsyncHandler(async (req: Request, res: Response) => {
+    const trips = await getTrips(req);
+    res.status(HttpStatus.OK).json(trips);
   })
 );
 
