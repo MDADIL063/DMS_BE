@@ -124,6 +124,7 @@ export enum Endpoints {
   TRIP_COUNT = "/trips-count",
   ASSIGN_DRIVER = "/:tripId/assign-driver/:driverId",
   UPDATE_TRIP_STATUS = "/:id/update-status",
+  TRIP_ACTIVITY = "/:id/activity",
 }
 
 export enum ValidationKeys {
@@ -151,6 +152,7 @@ export enum SchemaNames {
   DRIVER_AVAILABILITY = "Driver_availability",
   FEEDBACK = "FeedBack",
   TRIP = "trip",
+  TRIP_ACTIVITY = "Trip_Activity",
 }
 
 export enum QueryBuilderKeys {

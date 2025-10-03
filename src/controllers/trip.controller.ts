@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 import AsyncHandler from "express-async-handler";
 import { Endpoints, HttpStatus, TripStatus } from "../data/app.constants";
 //import { addAddress, deleteAddress, getAddressById, updateAddress, getAllAddress, makeAddressPrimary } from "../services/address.service";
-import { addTrip, getTrips, getSingleTrip, assignDriverToTrip, updateTripStatus } from "../services/trip.service";
+import { addTrip, getTrips, getSingleTrip, assignDriverToTrip, updateTripStatus, getAllTripActivities } from "../services/trip.service";
 import Trip from "../models/trip.model";
 
 const tripController = Router();
@@ -115,28 +115,12 @@ tripController.put(
   })
 );
 
-// tripController.put(
-//   Endpoints.ID,
-//   AsyncHandler(async (req: Request, res: Response) => {
-//     const response = await updateAddress(req);
-//     res.status(HttpStatus.OK).json(response);
-//   })
-// );
-
-// tripController.get(
-//   Endpoints.ROOT,
-//   AsyncHandler(async (req: Request, res: Response) => {
-//     const response = await getAllAddress(req);
-//     res.status(HttpStatus.OK).json(response);
-//   })
-// );
-
-// tripController.delete(
-//   Endpoints.ID,
-//   AsyncHandler(async (req: Request, res: Response) => {
-//     const response = await deleteAddress(req);
-//     res.status(HttpStatus.OK).json(response);
-//   })
-// );
+tripController.get(
+  Endpoints.TRIP_ACTIVITY,
+  AsyncHandler(async (req: Request, res: Response) => {
+    const response = await getAllTripActivities(req.params.id);
+    res.status(HttpStatus.OK).json(response);
+  })
+);
 
 export default tripController;

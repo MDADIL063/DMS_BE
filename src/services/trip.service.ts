@@ -17,6 +17,8 @@ import Trip from "../models/trip.model";
 import validate from "../validators/validation";
 import { buildQuery } from "./util.service";
 import { updateDriverStatus } from "./driver-availability.service";
+import { ITripActivity } from "../interfaces/trip-activity.interface";
+import TripActivity from "../models/trip-activity.model";
 
 const addTrip = async (req: Request): Promise<ITrip> => {
   // Validating vehicle before saving into DB
@@ -29,7 +31,7 @@ const addTrip = async (req: Request): Promise<ITrip> => {
   const { reason, description, startLocation, endLocation, distance, duration, capacity, startDateTime, vehicle, itemToCarry, price } =
     req.body;
 
-  const trip = new Trip({
+  const newTrip = new Trip({
     reason,
     description,
     customer: req.user._id,
@@ -41,11 +43,13 @@ const addTrip = async (req: Request): Promise<ITrip> => {
     distance,
     duration,
     startDateTime,
-    status: "New", // 🚀 new status when trip is first created
+    status: TripStatus.NEW, // 🚀 new status when trip is first created
     price,
   });
 
-  return await trip.save();
+  const trip = await newTrip.save();
+  await addTripActivity(trip._id.toString(), "Trip created", TripStatus.NEW);
+  return trip;
 };
 const getTrips = async (req: Request): Promise<IListResponse> => {
   // Build query using your query builder (like for drivers)
@@ -78,7 +82,9 @@ const getSingleTrip = async (id: string): Promise<ITrip | null> => {
 };
 
 const assignDriverToTrip = async (tripId: string, driverId: string): Promise<ITrip | null> => {
-  return await Trip.findOneAndUpdate({ _id: tripId }, { driver: driverId, status: TripStatus.SCHEDULED }).populate(PopulateKeys.TRIP);
+  const trip = await Trip.findOneAndUpdate({ _id: tripId }, { driver: driverId, status: TripStatus.SCHEDULED }).populate(PopulateKeys.TRIP);
+  await addTripActivity(tripId, "Trip scheduled", TripStatus.SCHEDULED);
+  return trip;
 };
 
 const updateTripStatus = async (tripId: string, status: TripStatus): Promise<ITrip | null> => {
@@ -89,18 +95,37 @@ const updateTripStatus = async (tripId: string, status: TripStatus): Promise<ITr
   if (status === TripStatus.INPROGRESS) {
     updateData.tripStartDateTime = new Date().toISOString();
     await updateDriverStatus(trip?.driver?._id, DriverAvailabilityStatus.ON_TRIP);
+    await addTripActivity(tripId, "Trip started", TripStatus.INPROGRESS);
   }
 
   if (status === TripStatus.COMPLETED) {
     updateData.tripCompletedDateTime = new Date().toISOString();
     await updateDriverStatus(trip?.driver?._id, DriverAvailabilityStatus.AVAILABLE);
+    await addTripActivity(tripId, "Trip completed", TripStatus.COMPLETED);
   }
 
   if (status === TripStatus.CANCELLED) {
     updateData.tripCancelledDateTime = new Date().toISOString();
+    await addTripActivity(tripId, "Trip cancelled", TripStatus.CANCELLED);
   }
 
   return Trip.findOneAndUpdate({ _id: tripId }, updateData).populate(PopulateKeys.TRIP) as unknown as ITrip;
 };
 
-export { addTrip, getSingleTrip, getTrips, assignDriverToTrip, updateTripStatus };
+const addTripActivity = async (tripId: string, message: string, tripStatus: `${TripStatus}`): Promise<ITripActivity | null> => {
+  const tripActivity = new TripActivity({
+    trip: tripId,
+    message,
+    tripStatus,
+  });
+
+  return await tripActivity.save();
+};
+
+const getAllTripActivities = async (tripId: string): Promise<ITripActivity[]> => {
+  return await TripActivity.find({ trip: tripId })
+    .populate("trip") // include customer details
+    .sort([[AppDefaults.SORT as string, -1]]);
+};
+
+export { addTrip, getSingleTrip, getTrips, assignDriverToTrip, updateTripStatus, getAllTripActivities };
