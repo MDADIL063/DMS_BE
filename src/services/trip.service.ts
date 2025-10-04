@@ -51,6 +51,16 @@ const addTrip = async (req: Request): Promise<ITrip> => {
   await addTripActivity(trip._id.toString(), "Trip created", TripStatus.NEW);
   return trip;
 };
+
+const updateTrip = async (id: string, reqBody: any): Promise<any> => {
+  const errorMessage = validate(ValidationKeys.TRIP, reqBody);
+  if (errorMessage) {
+    throw new AppError(HttpStatus.BAD_REQUEST, errorMessage);
+  }
+
+  return await Trip.findByIdAndUpdate(id, reqBody);
+};
+
 const getTrips = async (req: Request): Promise<IListResponse> => {
   // Build query using your query builder (like for drivers)
   const { query, queryParams } = buildQuery(QueryBuilderKeys.TRIP_LIST, req, {
@@ -128,4 +138,4 @@ const getAllTripActivities = async (tripId: string): Promise<ITripActivity[]> =>
     .sort([[AppDefaults.SORT as string, 1]]);
 };
 
-export { addTrip, getSingleTrip, getTrips, assignDriverToTrip, updateTripStatus, getAllTripActivities };
+export { addTrip, getSingleTrip, getTrips, assignDriverToTrip, updateTripStatus, getAllTripActivities, updateTrip };

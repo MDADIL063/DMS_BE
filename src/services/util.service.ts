@@ -150,7 +150,6 @@ const buildQuery = (queryBuilderKey: `${QueryBuilderKeys}`, req: Request, defaul
 
       // ✅ role-based filtering
       if (req.user.role === UserRoles.CUSTOMER) {
-        console.log(req.user._id);
         query.$and.push({ customer: { $eq: req.user._id } });
       } else if (req.user.role === UserRoles.DRIVER) {
         query.$and.push({ driver: { $eq: req.user._id } });
